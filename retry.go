@@ -1,6 +1,9 @@
 package retry
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 func Do(maxRetries int, f func() error) error {
 	retries := 0
@@ -12,7 +15,7 @@ func Do(maxRetries int, f func() error) error {
 			retries++
 
 			if retries >= maxRetries {
-				return err
+				return fmt.Errorf("max retries reached with error: %v", err.Error())
 			}
 
 			continue
@@ -37,7 +40,7 @@ func WithBackOff(maxRetries int, f func() error) error {
 			retries++
 
 			if retries >= maxRetries {
-				return err
+				return fmt.Errorf("max retries with back off reached with error: %v", err.Error())
 			}
 
 			continue
