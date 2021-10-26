@@ -15,7 +15,7 @@ func Do(maxRetries int, f func() error) error {
 			retries++
 
 			if retries >= maxRetries {
-				return fmt.Errorf("max retries reached with error: %v", err.Error())
+				return fmt.Errorf("max retries [%v] reached with error: %v", retries, err.Error())
 			}
 
 			continue
@@ -40,7 +40,7 @@ func WithBackOff(maxRetries int, f func() error) error {
 			retries++
 
 			if retries >= maxRetries {
-				return fmt.Errorf("max retries with back off reached with error: %v", err.Error())
+				return fmt.Errorf("max retries with back off [%v] reached with error: %v", retries, err.Error())
 			}
 
 			continue
