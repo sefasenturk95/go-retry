@@ -20,7 +20,7 @@ func TestDo(t *testing.T) {
 }
 
 func TestWithBackOff(t *testing.T) {
-	err := WithBackOff(5, func() error {
+	err := WithBackOff(5, 50, func() error {
 		return errors.New("foo")
 	})
 	assert.Error(t, err)
