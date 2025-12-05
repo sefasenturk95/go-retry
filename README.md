@@ -52,4 +52,4 @@ if errors.Is(err, ErrNotFound) {
 
 ## License
 
-Apache-2.0
+MIT
