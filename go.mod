@@ -1,4 +1,4 @@
-module github.com/Sef1995/go-retry
+module github.com/sefasenturk95/go-retry
 
 go 1.16
 

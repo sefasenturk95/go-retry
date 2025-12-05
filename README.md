@@ -5,7 +5,7 @@ A simple Go package for retrying operations with optional exponential backoff.
 ## Installation
 
 ```bash
-go get github.com/Sef1995/go-retry
+go get github.com/sefasenturk95/go-retry
 ```
 
 ## Usage
@@ -13,7 +13,7 @@ go get github.com/Sef1995/go-retry
 ### Basic Retry
 
 ```go
-import "github.com/Sef1995/go-retry"
+import "github.com/sefasenturk95/go-retry"
 
 err := retry.Do(3, func() error {
     return someOperation()
