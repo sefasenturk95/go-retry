@@ -2,16 +2,19 @@ package retry
 
 import (
 	"errors"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestDo(t *testing.T) {
+	originalErr := errors.New("foo")
 	err := Do(5, func() error {
-		return errors.New("foo")
+		return originalErr
 	})
 	assert.Error(t, err)
-	assert.Equal(t, errors.New("max retries [5] reached with error: foo"), err)
+	assert.ErrorIs(t, err, originalErr)
+	assert.Contains(t, err.Error(), "max retries [5] reached")
 
 	err = Do(5, func() error {
 		return nil
@@ -20,9 +23,11 @@ func TestDo(t *testing.T) {
 }
 
 func TestWithBackOff(t *testing.T) {
+	originalErr := errors.New("foo")
 	err := WithBackOff(5, 50, func() error {
-		return errors.New("foo")
+		return originalErr
 	})
 	assert.Error(t, err)
-	assert.Equal(t, errors.New("max retries with back off [5] reached with error: foo"), err)
+	assert.ErrorIs(t, err, originalErr)
+	assert.Contains(t, err.Error(), "max retries [5] reached")
 }
